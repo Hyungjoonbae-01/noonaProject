@@ -16,6 +16,9 @@ const RegisterPage = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
+      if (!name || !email || !password || !secPassword) {
+        throw new Error("모든 항목을 입력해주세요.");
+      }
       if (password !== secPassword) {
         throw new Error("비밀번호가 일치하지 않습니다.");
       }
