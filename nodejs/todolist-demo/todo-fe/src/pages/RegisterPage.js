@@ -27,7 +27,7 @@ const RegisterPage = () => {
         email,
         password,
       });
-      if (response.status == 200) {
+      if (response.status === 200) {
         navigate("/login");
       } else {
         throw new Error(response.data.error);
