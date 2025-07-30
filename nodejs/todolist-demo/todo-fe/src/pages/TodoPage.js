@@ -5,7 +5,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 
-const TodoPage = () => {
+const TodoPage = ({ setUser }) => {
   const [todoList, setTodoList] = useState([]);
   const [todoValue, setTodoValue] = useState("");
 
@@ -17,6 +17,11 @@ const TodoPage = () => {
   useEffect(() => {
     getTasks();
   }, []);
+  const logout = () => {
+    setUser(null);
+    sessionStorage.removeItem("token");
+    api.defaults.headers["authorization"] = "";
+  };
   const addTodo = async () => {
     try {
       const response = await api.post("/tasks", {
@@ -70,9 +75,30 @@ const TodoPage = () => {
           />
         </Col>
         <Col xs={12} sm={2}>
-          <button onClick={addTodo} className="button-add">
-            추가
-          </button>
+          <Row>
+            <Col xs={12}>
+              <button onClick={addTodo} className="button-add">
+                추가
+              </button>
+            </Col>
+            <Col xs={12}>
+              <button
+                onClick={logout}
+                className="button-logout"
+                style={{
+                  backgroundColor: "#F64C46",
+                  color: "white",
+                  width: "100%",
+                  border: "none",
+                  padding: "10px",
+                  marginTop: "10px",
+                  borderRadius: "5px",
+                }}
+              >
+                로그아웃
+              </button>
+            </Col>
+          </Row>
         </Col>
       </Row>
 
