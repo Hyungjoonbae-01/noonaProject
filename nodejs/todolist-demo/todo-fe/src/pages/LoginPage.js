@@ -3,15 +3,15 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import api from "../utils/api";
 import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 import { Link } from "react-router-dom";
 
-const LoginPage = () => {
+const LoginPage = ({ user, setUser }) => {
   const [error, setError] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const [user, setUser] = useState(null);
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -33,7 +33,9 @@ const LoginPage = () => {
       setError(error.message);
     }
   };
-
+  if (user) {
+    return <Navigate to="/" />;
+  }
   return (
     <div className="display-center">
       {error && <div style={{ color: "red" }}>{error}</div>}
