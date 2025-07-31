@@ -5,7 +5,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 
-const TodoPage = ({ setUser }) => {
+const TodoPage = ({ user, setUser }) => {
   const [todoList, setTodoList] = useState([]);
   const [todoValue, setTodoValue] = useState("");
 
@@ -24,6 +24,7 @@ const TodoPage = ({ setUser }) => {
   };
   const addTodo = async () => {
     try {
+      console.log("token", api.defaults.headers["authorization"]);
       const response = await api.post("/tasks", {
         task: todoValue,
         isComplete: false,

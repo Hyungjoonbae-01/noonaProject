@@ -32,7 +32,7 @@ function App() {
         path="/"
         element={
           <PrivateRoute user={user}>
-            <TodoPage setUser={setUser} />
+            <TodoPage user={user} setUser={setUser} />
           </PrivateRoute>
         }
       />
@@ -40,7 +40,7 @@ function App() {
 
       <Route
         path="/login"
-        element={<LoginPage user={user} setUser={setUser} />}
+        element={<LoginPage user={user} setUser={setUser} getUser={getUser} />}
       />
     </Routes>
   );

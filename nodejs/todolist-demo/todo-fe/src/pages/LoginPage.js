@@ -7,7 +7,7 @@ import { Navigate } from "react-router-dom";
 
 import { Link } from "react-router-dom";
 
-const LoginPage = ({ user, setUser }) => {
+const LoginPage = ({ user, setUser, getUser }) => {
   const [error, setError] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -21,9 +21,9 @@ const LoginPage = ({ user, setUser }) => {
         password,
       });
       if (response.status === 200) {
-        setUser(response.data.user);
         sessionStorage.setItem("token", response.data.token);
         api.defaults.headers["authorization"] = "bearer " + response.data.token;
+        setUser(response.data.user);
         setError("");
         navigate("/");
       } else {

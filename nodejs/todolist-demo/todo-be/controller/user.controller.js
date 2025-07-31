@@ -25,7 +25,7 @@ userController.createUser = async (req, res) => {
 userController.loginWithEmail = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const user = await User.findOne({ email }, "-createdAt -updatedAt -__v");
+    const user = await User.findOne({ email });
     if (user) {
       const isMatch = bcrypt.compareSync(password, user.password);
       if (isMatch) {
